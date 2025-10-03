@@ -19,6 +19,8 @@ Representation:
 ### DisableLogger
 
 Context manager to temporarily suppress log messages.
+By default, suppresses all log messages from levels 0 - MODULE_DEBUG (inclusive).
+Can be parametrized by providing `level` argument.
 
 #### Usage
 
@@ -26,6 +28,13 @@ Context manager to temporarily suppress log messages.
 from mfd_common_libs import DisableLogger
 
 with DisableLogger():
+    # do something
+```
+
+```python
+from mfd_common_libs import DisableLogger
+
+with DisableLogger(level=logging.INFO):
     # do something
 ```
 
