@@ -29,13 +29,14 @@ def os_supported(*expected_os: "OSName") -> Any:
     :raises OSSupportedDecoratorError: if not found necessary 'connection'
     :raises UnexpectedOSException: if OS is unexpected
     """
+
     def decorate(function: Callable) -> Callable:
         @wraps(function)
         def wrapper(*args, **kwargs) -> Any:
             try:
                 from mfd_connect import Connection
             except ImportError:
-                logger.log(level=MODULE_DEBUG, msg=f"mfd-connect module is not installed. Skipping OS verification.")
+                logger.log(level=MODULE_DEBUG, msg="mfd-connect module is not installed. Skipping OS verification.")
                 return function(*args, **kwargs)
             for kwarg_name, kwarg_value in kwargs.items():
                 if isinstance(kwarg_value, Connection):
